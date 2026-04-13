@@ -4,6 +4,8 @@ Cursor-style checkpoint & undo for Claude Code.
 
 Auto-snapshots your files before each prompt. Revert instantly — zero tokens, zero reimplementation.
 
+![checkpoint demo](demo.png)
+
 ## The Problem
 
 You give Claude a prompt. It makes big changes across multiple files. You don't like the result. Now what?
