@@ -1,0 +1,23 @@
+{
+  "name": "@masyv/checkpoint",
+  "version": "1.0.0",
+  "description": "Cursor-style checkpoint & undo for Claude Code — auto-snapshot files before each prompt, instantly revert",
+  "type": "module",
+  "main": "scripts/store.js",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude-code",
+    "checkpoint",
+    "undo",
+    "revert",
+    "snapshot",
+    "plugin"
+  ],
+  "author": "masyv",
+  "license": "MIT"
+}

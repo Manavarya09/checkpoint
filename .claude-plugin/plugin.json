@@ -1,0 +1,11 @@
+{
+  "name": "checkpoint",
+  "description": "Cursor-style checkpoint & undo for Claude Code. Auto-snapshots files before each prompt so you can instantly revert changes.",
+  "version": "1.0.0",
+  "author": { "name": "masyv", "url": "https://github.com/Manavarya09" },
+  "homepage": "https://github.com/Manavarya09/checkpoint",
+  "repository": "https://github.com/Manavarya09/checkpoint",
+  "license": "MIT",
+  "keywords": ["claude-code", "checkpoint", "undo", "revert", "snapshot", "version-control"],
+  "skills": "./skills/"
+}

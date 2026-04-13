@@ -1,0 +1,14 @@
+{
+  "name": "checkpoint-marketplace",
+  "owner": { "name": "masyv", "url": "https://github.com/Manavarya09" },
+  "plugins": [
+    {
+      "name": "checkpoint",
+      "source": "./",
+      "description": "Cursor-style checkpoint & undo for Claude Code. Auto-snapshots files before each prompt so you can instantly revert.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["undo", "checkpoint", "revert", "snapshot"]
+    }
+  ]
+}
