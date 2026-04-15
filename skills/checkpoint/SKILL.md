@@ -80,10 +80,19 @@ When the user says things like:
 4. **Undo** = copy snapshot files back + delete newly created files
 5. Every undo creates a safety checkpoint first (so you can undo the undo)
 
+## Auto-Expiry
+
+Old checkpoints are automatically pruned to prevent unbounded disk growth. After each new checkpoint is created, if the total count exceeds the limit, the oldest checkpoints are removed.
+
+- **Default limit:** 50 checkpoints per session
+- **Configure via environment variable:** set `CHECKPOINT_MAX` to a custom number (e.g. `CHECKPOINT_MAX=100`)
+- Pruned checkpoint directories are deleted from disk immediately
+- The manifest is updated to reflect the removal
+
 ## Important Notes
 
 - Checkpoints only track files Claude modifies — not the entire project
 - Storage is in `~/.claude-checkpoints/<session-id>/`
-- Checkpoints persist for the session lifetime
+- Checkpoints persist for the session lifetime (up to the `CHECKPOINT_MAX` limit)
 - Works with or without git — completely independent
 - Zero token cost to undo — it's just file copies
