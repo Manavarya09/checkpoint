@@ -4,6 +4,7 @@ import { join, dirname, relative, resolve } from 'path';
 import { homedir } from 'os';
 
 const CHECKPOINTS_ROOT = join(homedir(), '.claude-checkpoints');
+const DEFAULT_MAX_CHECKPOINTS = 50;
 
 function getSessionDir(sessionId) {
   return join(CHECKPOINTS_ROOT, sessionId);
@@ -69,6 +70,28 @@ export function trackFile(sessionId, filePath, projectRoot) {
   return { relPath, isNew };
 }
 
+// Remove oldest checkpoints when over the limit
+function cleanOldCheckpoints(sessionId, maxCheckpoints) {
+  const manifest = loadManifest(sessionId);
+  const checkpoints = manifest.checkpoints;
+
+  if (checkpoints.length <= maxCheckpoints) return 0;
+
+  const toRemove = checkpoints.splice(0, checkpoints.length - maxCheckpoints);
+  let removed = 0;
+
+  for (const cp of toRemove) {
+    const cpDir = join(getSessionDir(sessionId), String(cp.id));
+    if (existsSync(cpDir)) {
+      rmSync(cpDir, { recursive: true });
+    }
+    removed++;
+  }
+
+  saveManifest(sessionId, manifest);
+  return removed;
+}
+
 // Create a checkpoint by snapshotting all tracked files
 export function createCheckpoint(sessionId, projectRoot, promptPreview = '') {
   const manifest = loadManifest(sessionId);
@@ -111,7 +134,11 @@ export function createCheckpoint(sessionId, projectRoot, promptPreview = '') {
   tracked.newFiles = {};
   saveTrackedFiles(sessionId, tracked);
 
-  return { id, files: files.length, newFiles: newFiles.length };
+  // Prune old checkpoints if over the limit
+  const maxCheckpoints = parseInt(process.env.CHECKPOINT_MAX || DEFAULT_MAX_CHECKPOINTS, 10);
+  const pruned = cleanOldCheckpoints(sessionId, maxCheckpoints);
+
+  return { id, files: files.length, newFiles: newFiles.length, pruned };
 }
 
 // List all checkpoints
