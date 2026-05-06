@@ -1,5 +1,11 @@
 # checkpoint
 
+[![License: MIT](https://img.shields.io/github/license/Manavarya09/checkpoint?color=0a0a0a)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/Manavarya09/checkpoint?style=flat&color=0a0a0a)](https://github.com/Manavarya09/checkpoint/stargazers)
+[![Issues](https://img.shields.io/github/issues/Manavarya09/checkpoint?color=0a0a0a)](https://github.com/Manavarya09/checkpoint/issues)
+[![Last commit](https://img.shields.io/github/last-commit/Manavarya09/checkpoint?color=0a0a0a)](https://github.com/Manavarya09/checkpoint/commits/main)
+
+
 Cursor-style checkpoint & undo for Claude Code.
 
 Auto-snapshots your files before each prompt. Revert instantly — zero tokens, zero reimplementation.
